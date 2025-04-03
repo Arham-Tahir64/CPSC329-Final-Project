@@ -1,247 +1,324 @@
-/* Basic Reset & Font */
+/* Reset & Font */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 20px;
   background-color: #f4f7f6;
   color: #333;
+  line-height: 1.5;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* Basic App Styling */
+/* App Container */
 .App {
   max-width: 900px;
   margin: 20px auto;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Headings */
 h1, h2 {
   color: #0056b3;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+h2 {
+  margin-top: 0; /* Remove extra top margin inside tab content */
+  color: #0069d9;
+}
+
+h3 {
+  color: #343a40;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+h4 {
+  color: #495057;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
 }
 
 /* Tabs */
 .tabs {
   display: flex;
   justify-content: center;
-  margin-bottom: 25px;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
+  margin-bottom: 0; /* Remove bottom margin */
+  border-bottom: 2px solid #dee2e6;
 }
 
 .tabs button {
-  padding: 10px 20px;
-  margin: 0 5px;
+  padding: 12px 25px;
+  margin: 0 2px -2px 2px; /* Overlap border */
   cursor: pointer;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
+  border: 2px solid transparent;
+  border-bottom: none;
+  background-color: transparent; /* Make inactive tabs transparent */
   border-radius: 5px 5px 0 0;
-  font-size: 1em;
-  transition: background-color 0.3s, border-color 0.3s;
+  font-size: 1.05em;
+  color: #0056b3;
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
 }
 
 .tabs button:hover {
-  background-color: #e9e9e9;
+  background-color: #e9ecef;
+  border-color: #e9ecef #e9ecef transparent #e9ecef;
 }
 
 .tabs button.active {
-  background-color: #007bff;
-  color: white;
-  border-color: #007bff;
-  border-bottom: 1px solid #007bff; /* Adjust for active look */
+  background-color: #fff; /* Match content background */
+  color: #0056b3;
+  border-color: #dee2e6 #dee2e6 #fff #dee2e6; /* Connect border */
+  border-bottom: 2px solid #fff; /* Cover the main border */
+  font-weight: 600;
 }
 
+/* Tab Content */
 .tab-content {
-  padding: 20px;
-  border: 1px solid #eee;
+  padding: 30px 25px;
+  border: 2px solid #dee2e6;
   border-top: none;
   border-radius: 0 0 8px 8px;
   background-color: #ffffff;
-  min-height: 300px; /* Ensure content area has some height */
+  min-height: 400px; /* Increased height */
 }
 
-/* Add Form & Component Styling */
+/* Component Containers */
 .cipher-container, .analysis-container, .established-container {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Spacing between elements */
+  gap: 20px; /* Increased spacing */
 }
 
+/* Form Group */
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
 .form-group label {
-  font-weight: bold;
-  color: #555;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.95em;
 }
 
 .form-group input[type="text"],
 .form-group input[type="number"],
+.form-group input[type="password"],
 .form-group textarea,
 .form-group select {
-  padding: 10px;
-  border: 1px solid #ccc;
+  padding: 12px;
+  border: 1px solid #ced4da;
   border-radius: 4px;
   font-size: 1em;
-  width: 100%; /* Make inputs take full width */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 textarea {
-    resize: vertical; /* Allow vertical resizing */
+  resize: vertical;
+  min-height: 80px;
 }
 
+.form-group small {
+  font-size: 0.85em;
+  color: #6c757d;
+  margin-top: 2px;
+}
+
+/* Button Group & Buttons */
 .button-group {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 5px; /* Reduced top margin */
 }
 
-.button-group button, .cipher-container button, .analysis-container button, .established-container button {
-  padding: 10px 15px;
+.button-group button,
+.cipher-container > button, /* Direct child button */
+.analysis-container > button, /* Direct child button */
+.established-container button { /* Any button inside */
+  padding: 10px 20px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1em;
-  transition: background-color 0.3s;
+  font-weight: 500;
+  transition: background-color 0.2s, opacity 0.2s;
 }
 
-.button-group button:hover, .cipher-container button:hover, .analysis-container button:hover, .established-container button:hover {
+.button-group button:hover,
+.cipher-container > button:hover,
+.analysis-container > button:hover,
+.established-container button:hover {
   background-color: #0056b3;
 }
 
- /* Add a secondary button style if needed */
-.button-group button.secondary, .cipher-container button.secondary, .analysis-container button.secondary, .established-container button.secondary {
-   background-color: #6c757d;
-}
-.button-group button.secondary:hover, .cipher-container button.secondary:hover, .analysis-container button.secondary:hover, .established-container button.secondary:hover {
-   background-color: #5a6268;
+.button-group button.secondary,
+.established-container button.secondary {
+  background-color: #6c757d;
 }
 
+.button-group button.secondary:hover,
+.established-container button.secondary:hover {
+  background-color: #5a6268;
+}
+
+button:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Result Box */
 .result-box {
-  margin-top: 15px;
-  padding: 15px;
+  margin-top: 10px;
+  padding: 15px 20px;
   background-color: #e9ecef;
   border: 1px solid #ced4da;
   border-radius: 4px;
-  word-wrap: break-word; /* Wrap long words/results */
+  word-wrap: break-word;
 }
 
 .result-box h3 {
   margin-top: 0;
   margin-bottom: 10px;
   color: #333;
+  font-size: 1.1em;
 }
 
 .result-box pre {
-  white-space: pre-wrap; /* Wrap text within the pre tag */
+  white-space: pre-wrap;
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-  font-size: 0.95em;
-  color: #333;
+  font-size: 1em;
+  color: #212529;
+  background-color: transparent;
+  border: none;
+  padding: 0;
 }
 
+/* Educational Text */
 .educational-text {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-left: 4px solid #17a2b8; /* Info color */
-    font-size: 0.9em;
-    line-height: 1.6;
+  margin-top: 25px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-left: 5px solid #17a2b8; /* Info color */
+  border-radius: 0 4px 4px 0;
+  font-size: 0.95em;
+  line-height: 1.6;
 }
 
-/* Add Analysis Options Styling */
+.educational-text h3,
+.educational-text h4 {
+  margin-top: 0;
+  color: #17a2b8; /* Info color */
+}
+
+/* Options Group & Rows */
 .options-group {
-  padding: 15px;
-  border: 1px solid #eee;
+  padding: 15px 20px;
+  border: 1px solid #e9ecef;
   border-radius: 4px;
   background-color: #fdfdfd;
-  margin-bottom: 15px;
 }
 
 .options-group h4 {
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   color: #333;
 }
 
 .option-row {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Space between items in a row */
-    margin-bottom: 8px;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Increased gap */
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
-.option-row span {
-    font-weight: bold;
-    margin-right: 5px;
+.option-row span { /* For static text like "Analyze:" */
+  font-weight: 600;
+  margin-right: 5px;
 }
 
 .option-row label {
-    display: inline-flex; /* Align checkbox/radio with text */
-    align-items: center;
-    cursor: pointer;
-    font-weight: normal; /* Override potential bold from form-group */
-     margin-right: 10px; /* Space between labels */
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: normal;
+  margin-right: 5px;
 }
 
 .option-row input[type="checkbox"],
 .option-row input[type="radio"] {
-    margin-right: 5px; /* Space between control and text */
+  margin-right: 6px;
+  transform: scale(1.1); /* Slightly larger controls */
 }
 
 .option-row.inline-inputs label {
-     margin-right: 5px; /* Smaller gap for inline inputs */
+  margin-right: 5px;
 }
+
 .option-row.inline-inputs input[type="number"] {
-    padding: 5px; /* Smaller padding for small inputs */
-    width: 60px; /* Fixed small width */
+  padding: 8px;
+  width: 70px;
 }
 
-/* Style for disabled options (we'll add logic later) */
 .option-row input:disabled {
-    background-color: #e9ecef;
-    cursor: not-allowed;
-}
- .option-row label:has(input:disabled) { /* Style label containing disabled input */
-    color: #6c757d;
+  background-color: #e9ecef;
+  cursor: not-allowed;
 }
 
+/* Style label containing disabled input */
+.option-row label:has(input:disabled) {
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+
+/* Chart Container */
 .chart-container {
-    position: relative; /* Needed for Chart.js responsiveness */
-    width: 100%;
-    max-width: 800px; /* Optional: limit chart width */
-    margin: 20px auto; /* Center chart */
-    background: #fff;
-    padding: 15px;
-    border-radius: 4px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* Optional: limit chart width */
+  margin: 25px auto; /* Center chart */
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  border: 1px solid #dee2e6;
 }
 
-/* Add Error Box Styling */
+/* Error Box */
 .error-box {
   margin-top: 15px;
-  padding: 10px 15px;
+  padding: 12px 18px;
   background-color: #f8d7da; /* Light red */
   border: 1px solid #f5c6cb; /* Red border */
   color: #721c24; /* Dark red text */
   border-radius: 4px;
-  font-size: 0.9em;
+  font-size: 0.95em;
 }
