@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CaesarCipher from './components/CaesarCipher';
-import FrequencyAnalysis from './components/FrequencyAnalysis'; // Import the new component
+import FrequencyAnalysis from './components/FrequencyAnalysis';
+import EstablishedCiphers from './components/EstablishedCiphers';
 
 function App() {
   const [activeTab, setActiveTab] = useState('caesar');
@@ -12,7 +13,7 @@ function App() {
       case 'frequency':
         return <FrequencyAnalysis />;
       case 'established':
-        return <div>Established Ciphers Content Placeholder</div>;
+        return <EstablishedCiphers />;
       default:
         return <p>Select a tool.</p>;
     }
