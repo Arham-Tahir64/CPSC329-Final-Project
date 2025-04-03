@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import CaesarCipher from './components/CaesarCipher';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('caesar'); // Default tab
+  const [activeTab, setActiveTab] = useState('caesar');
 
   const renderContent = () => {
     switch (activeTab) {
       case 'caesar':
-        return <div>Caesar Cipher Content Placeholder</div>;
+        return <CaesarCipher />;
       case 'frequency':
         return <div>Frequency Analysis Content Placeholder</div>;
       case 'established':
