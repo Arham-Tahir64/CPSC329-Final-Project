@@ -1,20 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function App() {
+  const [activeTab, setActiveTab] = useState('caesar'); // Default tab
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'caesar':
+        return <div>Caesar Cipher Content Placeholder</div>;
+      case 'frequency':
+        return <div>Frequency Analysis Content Placeholder</div>;
+      case 'established':
+        return <div>Established Ciphers Content Placeholder</div>;
+      default:
+        return <p>Select a tool.</p>;
+    }
+  };
+
   return (
     <div className="App">
       <h1>React Cryptography Toolkit</h1>
 
-      {/* Tabs will be here */}
       <div className="tabs">
-        <button>Caesar Cipher</button>
-        <button>Frequency Analysis</button>
-        <button>Established Ciphers</button>
+        <button
+          className={activeTab === 'caesar' ? 'active' : ''}
+          onClick={() => setActiveTab('caesar')}
+        >
+          Caesar Cipher
+        </button>
+        <button
+          className={activeTab === 'frequency' ? 'active' : ''}
+          onClick={() => setActiveTab('frequency')}
+        >
+          Frequency Analysis
+        </button>
+        <button
+          className={activeTab === 'established' ? 'active' : ''}
+          onClick={() => setActiveTab('established')}
+        >
+          Established Ciphers
+        </button>
       </div>
 
       <div className="tab-content">
-        <p>Welcome! Select a tool from the tabs above.</p>
-        {/* Content here */}
+        {renderContent()}
       </div>
     </div>
   );
