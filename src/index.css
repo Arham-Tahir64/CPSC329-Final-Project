@@ -31,3 +31,43 @@ h1, h2 {
   text-align: center;
   margin-bottom: 20px;
 }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 5px 5px 0 0;
+  font-size: 1em;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.tabs button:hover {
+  background-color: #e9e9e9;
+}
+
+.tabs button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+  border-bottom: 1px solid #007bff; /* Adjust for active look */
+}
+
+.tab-content {
+  padding: 20px;
+  border: 1px solid #eee;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background-color: #ffffff;
+  min-height: 300px; /* Ensure content area has some height */
+}
