@@ -165,3 +165,72 @@ textarea {
     font-size: 0.9em;
     line-height: 1.6;
 }
+
+/* Add Analysis Options Styling */
+.options-group {
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fdfdfd;
+  margin-bottom: 15px;
+}
+
+.options-group h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.option-row {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between items in a row */
+    margin-bottom: 8px;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.option-row span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.option-row label {
+    display: inline-flex; /* Align checkbox/radio with text */
+    align-items: center;
+    cursor: pointer;
+    font-weight: normal; /* Override potential bold from form-group */
+     margin-right: 10px; /* Space between labels */
+}
+
+.option-row input[type="checkbox"],
+.option-row input[type="radio"] {
+    margin-right: 5px; /* Space between control and text */
+}
+
+.option-row.inline-inputs label {
+     margin-right: 5px; /* Smaller gap for inline inputs */
+}
+.option-row.inline-inputs input[type="number"] {
+    padding: 5px; /* Smaller padding for small inputs */
+    width: 60px; /* Fixed small width */
+}
+
+/* Style for disabled options (we'll add logic later) */
+.option-row input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+ .option-row label:has(input:disabled) { /* Style label containing disabled input */
+    color: #6c757d;
+}
+
+.chart-container {
+    position: relative; /* Needed for Chart.js responsiveness */
+    width: 100%;
+    max-width: 800px; /* Optional: limit chart width */
+    margin: 20px auto; /* Center chart */
+    background: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
