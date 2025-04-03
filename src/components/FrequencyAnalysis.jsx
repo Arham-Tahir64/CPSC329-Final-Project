@@ -10,14 +10,8 @@ import {
   Legend,
 } from 'chart.js';
 
-// Register Chart.js components
 ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
+  CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend
 );
 
 function FrequencyAnalysis() {
@@ -25,83 +19,94 @@ function FrequencyAnalysis() {
   const [analysisResults, setAnalysisResults] = useState(null);
   const [chartData, setChartData] = useState(null);
 
-  // Options state
-  const [ignoreNonAlpha, setIgnoreNonAlpha] = useState(true);
+  // --- Options State ---
+  const [analysisType, setAnalysisType] = useState('all');
+  const [kValue, setKValue] = useState(1);
+  const [kOffset, setKOffset] = useState(0);
   const [isCaseSensitive, setIsCaseSensitive] = useState(false);
+  const [ignoreNonAlpha, setIgnoreNonAlpha] = useState(true);
 
-   // Chart Options
-   const chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false, // Allow chart to fill container height
-        plugins: {
-         legend: {
-             display: false, // Usually don't need a legend for single dataset frequency
-         },
-         title: {
-             display: true,
-             text: 'Letter Frequency Analysis',
-         },
-         },
-         scales: {
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: 'Count'
-                }
-            },
-             x: {
-                title: {
-                    display: true,
-                    text: 'Letter'
-                }
-             }
-         }
+  // --- Chart Options
+   const chartOptions = { 
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, title: { display: true, text: 'Letter Frequency Analysis' } },
+        scales: { y: { beginAtZero: true, title: { display: true, text: 'Count' } }, x: { title: { display: true, text: 'Letter' } } }
    };
 
-
+  // --- Analysis Logic ---
   const handleAnalyze = () => {
     const frequencies = {};
-    const textToAnalyze = isCaseSensitive ? inputText : inputText.toUpperCase();
+    let processedText = '';
+
+    // 1. Filter text based on k-th selection
+    if (analysisType === 'kth') {
+      const k = Math.max(1, parseInt(kValue, 10) || 1); // Ensure k >= 1
+      const offset = Math.max(0, parseInt(kOffset, 10) || 0); // Ensure offset >= 0
+      for (let i = offset; i < inputText.length; i += k) {
+        processedText += inputText[i];
+      }
+    } else {
+      processedText = inputText;
+    }
+
+    // 2. Apply case sensitivity
+    const textToAnalyze = isCaseSensitive ? processedText : processedText.toUpperCase();
+
+    // 3. Define the alphabet to count
     const alphabet = isCaseSensitive
         ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
         : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-     for (const letter of alphabet) { frequencies[letter] = 0; }
+    // Initialize counts
+    for (const letter of alphabet) { frequencies[letter] = 0; }
 
+    // 4. Count frequencies, considering ignoreNonAlpha
     for (let i = 0; i < textToAnalyze.length; i++) {
       const char = textToAnalyze[i];
-       if (alphabet.includes(char)) {
-           frequencies[char] = frequencies[char] + 1;
-       } // else: ignore based on current logic
+      if (alphabet.includes(char)) {
+        frequencies[char]++;
+      } else if (!ignoreNonAlpha) {
+         // If not ignoring non-alpha, count them under a generic key
+         // Make sure this key is distinct if case-sensitive matters for it.
+         const nonAlphaKey = 'Non-Alpha';
+         frequencies[nonAlphaKey] = (frequencies[nonAlphaKey] || 0) + 1;
+         // Add 'Non-Alpha' to the initial list if needed? Add it here if it's the first time.
+         if(!(nonAlphaKey in frequencies)) frequencies[nonAlphaKey] = 1;
+      }
     }
-    setAnalysisResults(frequencies); // Set raw results
+
+     // If 'Non-Alpha' was added and has a count, keep it.
+     // Remove letters with 0 count (cleaner chart) unless 'Non-Alpha' is the only one.
+     const finalFrequencies = {};
+     let hasCounts = false;
+     for (const key in frequencies) {
+         if (frequencies[key] > 0) {
+             finalFrequencies[key] = frequencies[key];
+             hasCounts = true;
+         }
+     }
+
+    setAnalysisResults(hasCounts ? finalFrequencies : null); // Use null if no characters were counted
   };
 
-  // Effect to update chart data when analysisResults change
+  // --- Effect to update chart (same as before) ---
   useEffect(() => {
     if (analysisResults) {
       const labels = Object.keys(analysisResults);
       const data = Object.values(analysisResults);
-
       setChartData({
         labels: labels,
-        datasets: [
-          {
-            label: 'Frequency',
-            data: data,
-            backgroundColor: 'rgba(0, 123, 255, 0.6)', // Blue bars
-            borderColor: 'rgba(0, 123, 255, 1)',
-            borderWidth: 1,
-          },
-        ],
+        datasets: [{ /* ... dataset config ... */
+            label: 'Frequency', data: data,
+            backgroundColor: 'rgba(0, 123, 255, 0.6)', borderColor: 'rgba(0, 123, 255, 1)', borderWidth: 1,
+        }],
       });
     } else {
-        setChartData(null); // Clear chart if no results
+      setChartData(null);
     }
-  }, [analysisResults]); // Rerun when analysisResults updates
+  }, [analysisResults]);
 
-
+  // --- Render ---
   return (
     <div className="analysis-container">
       <h2>Frequency Analysis Tool</h2>
@@ -109,60 +114,51 @@ function FrequencyAnalysis() {
       {/* Input Text Area */}
       <div className="form-group">
         <label htmlFor="freq-text">Text to Analyze:</label>
-        <textarea
-          id="freq-text"
-          rows="6"
-          placeholder="Paste ciphertext or any text here..."
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-        />
+        <textarea id="freq-text" rows="6" value={inputText} onChange={(e) => setInputText(e.target.value)} />
       </div>
 
       {/* Options Group */}
       <div className="options-group">
         <h4>Analysis Options:</h4>
-         {/* Analysis Type Radio buttons - Logic added later */}
-         <div className="option-row">
-             <span>Analyze:</span>
-             <label><input type="radio" name="analysisType" value="all" defaultChecked/> Every Letter</label>
-             <label><input type="radio" name="analysisType" value="kth" /> Every K-th Letter</label>
-         </div>
-          <div className="option-row inline-inputs">
-                 <label htmlFor="kth-value"> K = </label>
-                 <input type="number" id="kth-value" min="1" defaultValue="1" style={{width: '60px'}} disabled/>
-                 <label htmlFor="kth-offset" style={{marginLeft: '15px'}}> Offset = </label>
-                 <input type="number" id="kth-offset" min="0" defaultValue="0" style={{width: '60px'}} disabled/>
-             </div>
+        <div className="option-row">
+          <span>Analyze:</span>
+          <label>
+            <input type="radio" name="analysisType" value="all" checked={analysisType === 'all'} onChange={() => setAnalysisType('all')} /> Every Letter
+          </label>
+          <label>
+            <input type="radio" name="analysisType" value="kth" checked={analysisType === 'kth'} onChange={() => setAnalysisType('kth')} /> Every K-th Letter
+          </label>
+        </div>
 
-         {/* Checkboxes */}
+        {/* K-th options - Enable/disable based on analysisType */}
+        <div className="option-row inline-inputs">
+          <label htmlFor="kth-value"> K = </label>
+          <input type="number" id="kth-value" min="1" value={kValue} onChange={(e) => setKValue(e.target.value)} disabled={analysisType !== 'kth'} />
+          <label htmlFor="kth-offset" style={{ marginLeft: '15px' }}> Offset = </label>
+          <input type="number" id="kth-offset" min="0" value={kOffset} onChange={(e) => setKOffset(e.target.value)} disabled={analysisType !== 'kth'} />
+        </div>
+
+        {/* Checkboxes */}
         <div className="option-row">
           <label>
-            <input
-                type="checkbox"
-                checked={isCaseSensitive}
-                onChange={(e) => setIsCaseSensitive(e.target.checked)}
-            /> Case-Sensitive
+            <input type="checkbox" checked={isCaseSensitive} onChange={(e) => setIsCaseSensitive(e.target.checked)} /> Case-Sensitive
           </label>
-          <label style={{marginLeft: '15px'}}>
-            <input
-                type="checkbox"
-                checked={ignoreNonAlpha}
-                onChange={(e) => setIgnoreNonAlpha(e.target.checked)}
-            /> Ignore Non-Alphabetic
+          <label style={{ marginLeft: '15px' }}>
+            <input type="checkbox" checked={ignoreNonAlpha} onChange={(e) => setIgnoreNonAlpha(e.target.checked)} /> Ignore Non-Alphabetic
           </label>
         </div>
       </div>
 
       {/* Analyze Button */}
-      <button onClick={handleAnalyze} style={{alignSelf: 'flex-start'}}>Analyze Text</button>
+      <button onClick={handleAnalyze} style={{ alignSelf: 'flex-start' }}>Analyze Text</button>
 
       {/* Chart Container */}
-      <div className="chart-container" style={{ height: '400px' }}> {/* Give explicit height */}
+       <div className="chart-container" style={{ height: '400px' }}>
         {chartData ? (
           <Bar options={chartOptions} data={chartData} />
         ) : (
           <p style={{ textAlign: 'center', paddingTop: '50px', color: '#666' }}>
-            Analysis results (chart) will appear here after clicking "Analyze Text".
+            {analysisResults === null && inputText ? 'Analysis resulted in zero counts based on options.' : 'Analysis results (chart) will appear here after clicking "Analyze Text".'}
           </p>
         )}
       </div>
