@@ -71,3 +71,97 @@ h1, h2 {
   background-color: #ffffff;
   min-height: 300px; /* Ensure content area has some height */
 }
+
+/* Add Form & Component Styling */
+.cipher-container, .analysis-container, .established-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Spacing between elements */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  width: 100%; /* Make inputs take full width */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.button-group button, .cipher-container button, .analysis-container button, .established-container button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.button-group button:hover, .cipher-container button:hover, .analysis-container button:hover, .established-container button:hover {
+  background-color: #0056b3;
+}
+
+ /* Add a secondary button style if needed */
+.button-group button.secondary, .cipher-container button.secondary, .analysis-container button.secondary, .established-container button.secondary {
+   background-color: #6c757d;
+}
+.button-group button.secondary:hover, .cipher-container button.secondary:hover, .analysis-container button.secondary:hover, .established-container button.secondary:hover {
+   background-color: #5a6268;
+}
+
+.result-box {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  word-wrap: break-word; /* Wrap long words/results */
+}
+
+.result-box h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.result-box pre {
+  white-space: pre-wrap; /* Wrap text within the pre tag */
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 0.95em;
+  color: #333;
+}
+
+.educational-text {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #17a2b8; /* Info color */
+    font-size: 0.9em;
+    line-height: 1.6;
+}
