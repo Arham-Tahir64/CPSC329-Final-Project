@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>React Cryptography Toolkit</h1>
+      <h1>CPSC 329 Cryptography Tools</h1>
 
       <div className="tabs">
         <button

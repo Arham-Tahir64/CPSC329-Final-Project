@@ -73,8 +73,6 @@ function FrequencyAnalysis() {
   return (
     <div className="analysis-container">
       <h2>Frequency Analysis Tool</h2>
-
-      {/* ... (Input fields, Options, Button, Chart Container remain the same) ... */}
         {/* Input Text Area */}
         <div className="form-group">
             <label htmlFor="freq-text">Text to Analyze:</label>

@@ -82,13 +82,13 @@ function EstablishedCiphers() {
       <div className="educational-text">
         <h3>One-Time Pad (OTP)</h3>
         <p>
-          The One-Time Pad is a theoretically unbreakable encryption technique when used correctly. It requires a pre-shared random key that is the same length as the message. Encryption is performed by combining the plaintext with the key using modular addition or, more commonly in computing, the bitwise XOR operation.
+          The One-Time Pad is a theoretically unbreakable encryption technique when used correctly. It requires a pre-shared random key that is the same length as the message. Encryption is performed by combining the plaintext with the key using the bitwise XOR operation.
         </p>
         <p>
           <strong>How it works (XOR):</strong> Each bit/byte of the plaintext is XORed with the corresponding bit/byte of the key. `Ciphertext = Plaintext XOR Key`. Decryption uses the same key: `Plaintext = Ciphertext XOR Key`.
         </p>
         <p>
-          <strong>Security:</strong> Its perfect secrecy relies on strict conditions: the key must be truly random, used only once, kept secret, and be at least as long as the message. In practice, generating and securely managing such keys is extremely difficult, making true OTP impractical for most applications. This implementation repeats or truncates the key if lengths differ, which breaks the core security guarantees and makes it vulnerable (effectively becoming a Vigenère cipher if the key is short and repeated).
+          <strong>Security:</strong> Its perfect secrecy relies on strict conditions: the key must be truly random, used only once, kept secret, and be at least as long as the message. In practice, generating and securely managing such keys is extremely difficult, making true OTP impractical for most applications. This implementation repeats or truncates the key if lengths differ, which breaks the core security guarantees and makes it vulnerable.
         </p>
       </div>
 

@@ -33,7 +33,7 @@ h1, h2 {
 }
 
 h2 {
-  margin-top: 0; /* Remove extra top margin inside tab content */
+  margin-top: 0; 
   color: #0069d9;
 }
 
@@ -55,17 +55,17 @@ h4 {
 .tabs {
   display: flex;
   justify-content: center;
-  margin-bottom: 0; /* Remove bottom margin */
+  margin-bottom: 0;
   border-bottom: 2px solid #dee2e6;
 }
 
 .tabs button {
   padding: 12px 25px;
-  margin: 0 2px -2px 2px; /* Overlap border */
+  margin: 0 2px -2px 2px;
   cursor: pointer;
   border: 2px solid transparent;
   border-bottom: none;
-  background-color: transparent; /* Make inactive tabs transparent */
+  background-color: transparent;
   border-radius: 5px 5px 0 0;
   font-size: 1.05em;
   color: #0056b3;
@@ -79,10 +79,10 @@ h4 {
 }
 
 .tabs button.active {
-  background-color: #fff; /* Match content background */
+  background-color: #fff;
   color: #0056b3;
-  border-color: #dee2e6 #dee2e6 #fff #dee2e6; /* Connect border */
-  border-bottom: 2px solid #fff; /* Cover the main border */
+  border-color: #dee2e6 #dee2e6 #fff #dee2e6;
+  border-bottom: 2px solid #fff;
   font-weight: 600;
 }
 
@@ -93,14 +93,14 @@ h4 {
   border-top: none;
   border-radius: 0 0 8px 8px;
   background-color: #ffffff;
-  min-height: 400px; /* Increased height */
+  min-height: 400px;
 }
 
 /* Component Containers */
 .cipher-container, .analysis-container, .established-container {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Increased spacing */
+  gap: 20px;
 }
 
 /* Form Group */
@@ -152,13 +152,13 @@ textarea {
 .button-group {
   display: flex;
   gap: 12px;
-  margin-top: 5px; /* Reduced top margin */
+  margin-top: 5px;
 }
 
 .button-group button,
-.cipher-container > button, /* Direct child button */
-.analysis-container > button, /* Direct child button */
-.established-container button { /* Any button inside */
+.cipher-container > button,
+.analysis-container > button,
+.established-container button {
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -225,7 +225,7 @@ button:disabled {
   margin-top: 25px;
   padding: 20px;
   background-color: #f8f9fa;
-  border-left: 5px solid #17a2b8; /* Info color */
+  border-left: 5px solid #17a2b8;
   border-radius: 0 4px 4px 0;
   font-size: 0.95em;
   line-height: 1.6;
@@ -234,7 +234,7 @@ button:disabled {
 .educational-text h3,
 .educational-text h4 {
   margin-top: 0;
-  color: #17a2b8; /* Info color */
+  color: #17a2b8;
 }
 
 /* Options Group & Rows */
@@ -254,12 +254,12 @@ button:disabled {
 .option-row {
   display: flex;
   align-items: center;
-  gap: 15px; /* Increased gap */
+  gap: 15px;
   margin-bottom: 10px;
   flex-wrap: wrap;
 }
 
-.option-row span { /* For static text like "Analyze:" */
+.option-row span {
   font-weight: 600;
   margin-right: 5px;
 }
@@ -275,7 +275,7 @@ button:disabled {
 .option-row input[type="checkbox"],
 .option-row input[type="radio"] {
   margin-right: 6px;
-  transform: scale(1.1); /* Slightly larger controls */
+  transform: scale(1.1);
 }
 
 .option-row.inline-inputs label {
@@ -303,8 +303,8 @@ button:disabled {
 .chart-container {
   position: relative;
   width: 100%;
-  max-width: 800px; /* Optional: limit chart width */
-  margin: 25px auto; /* Center chart */
+  max-width: 800px;
+  margin: 25px auto;
   background: #fff;
   padding: 20px;
   border-radius: 4px;
@@ -316,9 +316,9 @@ button:disabled {
 .error-box {
   margin-top: 15px;
   padding: 12px 18px;
-  background-color: #f8d7da; /* Light red */
-  border: 1px solid #f5c6cb; /* Red border */
-  color: #721c24; /* Dark red text */
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
   border-radius: 4px;
   font-size: 0.95em;
 }
