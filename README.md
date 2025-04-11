@@ -2,69 +2,70 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# CPSC 329 Cryptography Tools
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+This project is a web application built with React that provides several interactive tools for exploring and understanding fundamental concepts in cryptography. It allows users to encrypt, decrypt, and analyze text using various ciphers and techniques.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The application includes the following cryptography tools:
 
-### `npm test`
+* **Caesar Cipher Translator:**
+    * Encrypt or decrypt text using the classic Caesar cipher.
+    * Allows users to specify a shift value between 1 and 25.
+    * Includes an explanation of how the Caesar cipher works.
+* **Frequency Analysis Tool:**
+    * Analyzes the frequency of letters in a given text.
+    * Displays the results as a bar chart for visualization.
+    * Offers options for case-sensitivity, ignoring non-alphabetic characters, and analyzing every K-th letter with a specified offset (useful for polyalphabetic ciphers).
+    * Provides educational context on frequency analysis.
+* **Established Ciphers:**
+    * Encrypt and decrypt text using:
+        * One-Time Pad (OTP) with XOR operation.
+        * AES-GCM (Advanced Encryption Standard - Galois/Counter Mode) using the browser's Web Crypto API.
+    * Requires a key/password for operations. AES uses PBKDF2 for key derivation from the password.
+    * Supports different output/input formats (Hex, Base64) for ciphertext.
+    * Includes explanations of OTP and AES-GCM, including concepts like IV and key derivation.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Stack
 
-### `npm run build`
+* React
+* JavaScript
+* JSX
+* CSS
+* Chart.js (for Frequency Analysis visualization)
+* Web Crypto API (for AES-GCM implementation)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* `src/`
+    * `components/`: Contains the individual React components for each cryptography tool.
+        * `CaesarCipher.jsx`
+        * `FrequencyAnalysis.jsx`
+        * `EstablishedCiphers.jsx`
+    * `App.js`: The main application component, manages tabs and routing between tools.
+    * `index.js`: The entry point for the React application.
+    * `index.css`: Global styles for the application.
+    * `reportWebVitals.js`: For measuring web performance metrics.
+    * `setupTests.js`: Jest test setup.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Getting Started (Standard React Setup)
 
-### `npm run eject`
+To run this project locally (assuming you have Node.js and npm installed):
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd <repository-directory>
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Start the development server:**
+    ```bash
+    npm start
+    ```
+    This will typically open the application in your default web browser at `http://localhost:3000`.
