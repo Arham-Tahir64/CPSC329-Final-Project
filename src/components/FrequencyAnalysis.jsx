@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// ... (imports, ChartJS registration remain the same)
 import { Bar } from 'react-chartjs-2';
  import {
   Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,
@@ -38,13 +37,13 @@ function FrequencyAnalysis() {
        const textToAnalyze = isCaseSensitive ? processedText : processedText.toUpperCase();
        const alphabet = isCaseSensitive ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
        for (const letter of alphabet) { frequencies[letter] = 0; }
-       let nonAlphaKey = 'Non-Alpha'; // Key for non-alphabetic chars
+       let nonAlphaKey = 'Non-Alpha';
 
        for (let i = 0; i < textToAnalyze.length; i++) {
            const char = textToAnalyze[i];
            if (alphabet.includes(char)) { frequencies[char]++; }
            else if (!ignoreNonAlpha) {
-               if(!(nonAlphaKey in frequencies)) frequencies[nonAlphaKey] = 0; // Initialize if first time
+               if(!(nonAlphaKey in frequencies)) frequencies[nonAlphaKey] = 0;
                 frequencies[nonAlphaKey]++;
            }
        }
@@ -73,13 +72,11 @@ function FrequencyAnalysis() {
   return (
     <div className="analysis-container">
       <h2>Frequency Analysis Tool</h2>
-        {/* Input Text Area */}
         <div className="form-group">
             <label htmlFor="freq-text">Text to Analyze:</label>
             <textarea id="freq-text" rows="6" value={inputText} onChange={(e) => setInputText(e.target.value)} placeholder="Paste ciphertext or any text here..."/>
         </div>
 
-         {/* Options Group */}
          <div className="options-group">
             <h4>Analysis Options:</h4>
             <div className="option-row">
@@ -99,10 +96,8 @@ function FrequencyAnalysis() {
             </div>
         </div>
 
-        {/* Analyze Button */}
         <button onClick={handleAnalyze} style={{ alignSelf: 'flex-start' }}>Analyze Text</button>
 
-         {/* Chart Container */}
        <div className="chart-container" style={{ height: '400px' }}>
         {chartData ? ( <Bar options={chartOptions} data={chartData} /> ) : (
           <p style={{ textAlign: 'center', paddingTop: '50px', color: '#666' }}>
@@ -112,17 +107,16 @@ function FrequencyAnalysis() {
       </div>
 
 
-      {/* Educational Text */}
       <div className="educational-text">
         <h3>What is Frequency Analysis?</h3>
         <p>
           Frequency analysis is a fundamental technique in classical cryptography and cryptanalysis. It relies on the fact that, in any given language, certain letters and combinations of letters occur with characteristic frequencies. For example, in English, 'E' is the most common letter, followed by 'T', 'A', 'O', 'I', 'N', etc.
         </p>
         <p>
-          When analyzing ciphertext from simple substitution ciphers (like the Caesar cipher), comparing the frequency of letters in the ciphertext to the known frequencies of the language can reveal clues about the original plaintext. The most frequent letter in the ciphertext might correspond to 'E' in the plaintext, the next most frequent to 'T', and so on.
+          When analyzing ciphertext from simple substitution ciphers, comparing the frequency of letters in the ciphertext to the known frequencies of the language can reveal clues about the original plaintext. The most frequent letter in the ciphertext might correspond to 'E' in the plaintext, the next most frequent to 'T', and so on.
         </p>
         <p>
-          This tool allows you to visualize these frequencies. Analyzing every K-th letter is useful against polyalphabetic ciphers (like Vigenère) where different shifts are used periodically. By analyzing letters at intervals matching the key length (K), you can isolate the effects of a single Caesar shift within the larger cipher.
+          This tool allows you to visualize these frequencies. Analyzing every K-th letter is useful against polyalphabetic ciphers where different shifts are used periodically. By analyzing letters at intervals matching the key length (K), you can isolate the effects of a single Caesar shift within the larger cipher.
         </p>
       </div>
     </div>

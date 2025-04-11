@@ -7,36 +7,29 @@ function CaesarCipher() {
   
     const handleShiftChange = (e) => {
       const value = parseInt(e.target.value, 10);
-       if (!isNaN(value)) { // Only update if it's a number
-           setShift(Math.max(1, Math.min(25, value))); // Clamp value between 1 and 25
+       if (!isNaN(value)) {
+           setShift(Math.max(1, Math.min(25, value)));
        } else if (e.target.value === '') {
            setShift('');
        }
     };
 
 
- // Core Caesar Cipher Logic
  const processCaesar = (text, shiftAmount, encrypt = true) => {
     const actualShift = encrypt ? shiftAmount : -shiftAmount;
-    // Ensure shift wraps around correctly for decryption too
-    const effectiveShift = ((actualShift % 26) + 26) % 26; // Handles negative shifts properly
+    const effectiveShift = ((actualShift % 26) + 26) % 26;
 
     return text.split('').map(char => {
       const charCode = char.charCodeAt(0);
 
-      // Handle uppercase letters A-Z (65-90)
       if (charCode >= 65 && charCode <= 90) {
-         // Use the effectiveShift calculated above
         let shiftedCode = 65 + ((charCode - 65 + effectiveShift) % 26);
         return String.fromCharCode(shiftedCode);
       }
-      // Handle lowercase letters a-z (97-122)
       else if (charCode >= 97 && charCode <= 122) {
-         // Use the effectiveShift calculated above
         let shiftedCode = 97 + ((charCode - 97 + effectiveShift) % 26);
         return String.fromCharCode(shiftedCode);
       }
-      // Keep non-alphabetic characters unchanged
       else {
         return char;
       }
@@ -59,7 +52,6 @@ function CaesarCipher() {
          setOutputText("Please enter a valid shift value between 1 and 25.");
          return;
      }
-    // Decryption is just shifting in the opposite direction
     const result = processCaesar(inputText, currentShift, false);
     setOutputText(result);
   };
@@ -69,7 +61,6 @@ function CaesarCipher() {
     <div className="cipher-container">
       <h2>Caesar Cipher Translator</h2>
 
-      {/* Input Fields */}
        <div className="form-group">
         <label htmlFor="caesar-text">Text:</label>
         <textarea
@@ -105,7 +96,6 @@ function CaesarCipher() {
       </div>
 
 
-      {/* Educational Text */}
       <div className="educational-text">
         <h3>How the Caesar Cipher Works</h3>
         <p>
@@ -115,7 +105,7 @@ function CaesarCipher() {
           For example, with a shift of 3, 'A' would become 'D', 'B' would become 'E', and so on. When the shift goes past 'Z', it wraps back around to 'A'. Decryption involves shifting the letters back by the same amount.
         </p>
         <p>
-          While historically significant (used by Julius Caesar), it's very insecure by modern standards because there are only 25 possible keys (shifts), making it easy to break using brute force or frequency analysis.
+          While historically significant, it's very insecure by modern standards because there are only 25 possible keys (shifts), making it easy to break using brute force or frequency analysis.
         </p>
       </div>
     </div>
